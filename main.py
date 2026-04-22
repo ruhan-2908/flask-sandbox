@@ -1,20 +1,24 @@
-from flask import Flask, request, render_template
+from flask import Flask ,render_template, request
+
 app = Flask(__name__,template_folder='templates')
 
-
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def index():
-    myvalue = 'Ruhan'
-    myresult = 10+20
-    mylist = [10,20,30,40,50]
-    sample = 20
-    return render_template('index.html',myvalue=myvalue,myresult = myresult,mylist=mylist, mysample = sample)
+    if request.method == 'GET':
+        return render_template('index.html')
+    elif request.method == 'POST':
+
+        if 'username' in request.form.keys() and 'password' in request.form.keys():
+            username = request.form['username']
+            password = request.form['password']
+            if username == 'Ruhan' and password == 'hello@123A':
+                return "Success"
+            else:
+                return "Failure from bad credentials"
+        else:
+            return "Failure from no input"
 
 
-@app.template_filter('reverse')
-def reverse_string(str):
-    return str[::-1]
 
-
-if __name__ == "__main__":
-    app.run(host = '0.0.0.0',debug = True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0',debug = True)
