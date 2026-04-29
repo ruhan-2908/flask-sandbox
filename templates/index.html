@@ -3,7 +3,10 @@
 
 {% block content %}
      <h1>Hello World</h1>
+     <p>{{ message }}</p>
 
-
-     <img src="/img/Screenshot 2025-06-03 201138.png" alt="Text"/>
+     <a href="{{ url_for('set_data')}}">Set Session Data</a> <br>
+     <a href="{{ url_for('get_data')}}">Get Session Data</a> <br>
+     <a href="{{ url_for('clear_data')}}">Clear Session Data</a>
+     
 {% endblock %}
